@@ -12,8 +12,8 @@
     // here is a function called 'hello' that we'll expose
     // to FM below
 
-    const hello = ({ who }) => {
-      alert("Hello " + who);
+    const hello = function (object) {
+      alert("Hello " + object.who);
 
       // anything you return from a function can get
       // sent back to fm by providing a callback;
@@ -31,12 +31,12 @@
     //later you can add more 'methods' ie 'functions'
 
     externalAPI.addMethods({
-      goodbye: () => { alert('goodbye') },
-      seeYouSoon: () => { alert('see you soon') }
+      goodbye: function () { alert('goodbye') },
+      seeYouSoon: function () { alert('see you soon') }
     })
 
     // when you want to call a FileMaker script
-    const runScript = () => {
+    const runScript = function () {
       const fmName = fm.initialProps.fileName
       fm.callFMScript(fmName, 'MyScript', "Button clicked");
     }

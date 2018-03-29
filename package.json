@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "rollup": "^0.57.0",
+    "rollup-plugin-buble": "^0.19.2",
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-node-resolve": "^3.0.0"
   },
