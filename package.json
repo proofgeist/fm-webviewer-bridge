@@ -1,6 +1,6 @@
 {
   "name": "fm-webviewer-bridge",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "main": "dist/fm-webviewer-bridge.cjs.js",
   "module": "dist/fm-webviewer-bridge.esm.js",
   "browser": "dist/fm-webviewer-bridge.umd.js",
@@ -10,7 +10,11 @@
     "dev": "rollup -c -w",
     "test": "node test/test.js",
     "pretest": "npm run build",
-    "publish" : "npm run build && npm publish"
+    "publish:patch": "npm run build && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geistinteractive/fm-webviewer-bridge.git"
   },
   "devDependencies": {
     "rollup": "^0.57.0",
