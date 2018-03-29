@@ -1,6 +1,6 @@
 {
   "name": "fm-webviewer-bridge",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "dist/fm-webviewer-bridge.cjs.js",
   "module": "dist/fm-webviewer-bridge.esm.js",
   "browser": "dist/fm-webviewer-bridge.umd.js",
