@@ -4,15 +4,22 @@
   <script src='./dist/fm-webviewer-bridge.umd.js'></script>
 </head>
 
-
-
 <body>ok
   <script>
-    const hello = ({ who }) => {
-      alert("Hello " + who);
-      return { message: "hello " + who }
+    var hello = function (parameter) {
+      alert("Hello " + parameter.who);
+      return { message: "hello " + parameter.who }
     }
-    const exteralAPI = fm.externalAPI({ hello: hello })
+
+    var filterArray = function (parameter) {
+      var data = parameter.data;
+      var filterCity = parameter.filterCity;
+      var result = data.filter(function (element) {
+        return element.city === filterCity
+      })
+      return result
+    }
+    var exteralAPI = fm.externalAPI({ hello: hello, filterArray: filterArray })
     exteralAPI.start();
   </script>
 </body>

@@ -87,7 +87,7 @@ export const callFMScript = (fileName, scriptName, data, callback) => {
   console.log("---->parameter!", data);
 
   if (parameter.length > 1000 && window.clipboardData) {
-    window.clipboardData.setData("Text", parameter);
+    window.clipboardData.setData("Text", data);
     parameter = "giant";
   }
 

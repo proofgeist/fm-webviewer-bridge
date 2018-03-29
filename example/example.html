@@ -17,7 +17,7 @@
 
       // anything you return from a function can get
       // sent back to fm by providing a callback;
-      return { message: "hello " + who }
+      return { message: "hello " + object.who }
     }
 
 
@@ -40,6 +40,19 @@
       var fmName = fm.initialProps.fileName
       fm.callFMScript(fmName, 'MyScript', "Button clicked");
     }
+
+    var filterArray = function (parameter) {
+      var data = parameter.data;
+      var filterCity = parameter.filterCity;
+      var result = data.filter(function (element) {
+        return element.city === filterCity
+      })
+      return result
+    }
+
+    externalAPI.addMethods({
+      filterArray: filterArray
+    })
 
   </script>
 </body>
