@@ -1,6 +1,6 @@
 {
   "name": "fm-webviewer-bridge",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "main": "dist/fm-webviewer-bridge.cjs.js",
   "module": "dist/fm-webviewer-bridge.esm.js",
   "browser": "dist/fm-webviewer-bridge.umd.js",
@@ -22,7 +22,12 @@
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-node-resolve": "^3.0.0"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "author": "todd@geistinteractive.com",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "es6-object-assign": "^1.1.0"
+  }
 }

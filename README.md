@@ -127,4 +127,4 @@ Passing that JSON to "Execute JavaScript..." script will attempt to call a JavaS
 
 ## Example
 
-See the Example.fmp12 file for a full working example.
+See the FM-WebViewer-Bridge.fmp12 file for a full working example.

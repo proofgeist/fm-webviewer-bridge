@@ -1,70 +1,12 @@
-function assign(target, firstSource) {
-  if (target === undefined || target === null) {
-    throw new TypeError("Cannot convert first argument to object");
-  }
 
-  var to = Object(target);
-  for (var i = 1; i < arguments.length; i++) {
-    var nextSource = arguments[i];
-    if (nextSource === undefined || nextSource === null) {
-      continue;
-    }
+//polyfill Object.assign for IE
+require("es6-object-assign").polyfill();
+//attatch a windows error handler to make it easier to see errors on windows
+require("./win.error.handler").attach();
 
-    var keysArray = Object.keys(Object(nextSource));
-    for (
-      var nextIndex = 0, len = keysArray.length;
-      nextIndex < len;
-      nextIndex++
-    ) {
-      var nextKey = keysArray[nextIndex];
-      var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
-      if (desc !== undefined && desc.enumerable) {
-        to[nextKey] = nextSource[nextKey];
-      }
-    }
-  }
-  return to;
-}
-
-if (!Object.assign) {
-  Object.defineProperty(Object, "assign", {
-    enumerable: false,
-    configurable: true,
-    writable: true,
-    value: assign
-  });
-}
-
-if (window.clipboardData) {
-  window.onerror = function(message, source, lineno, colno, error) {
-    const errorDiv = document.createElement("div");
-    const title = document.createElement("h1");
-    title.innerHTML = "Error!";
-    errorDiv.appendChild(title);
-    const messageP = document.createElement("p");
-    messageP.innerHTML = message;
-    errorDiv.appendChild(messageP);
-    const sourceP = document.createElement("p");
-    const n = source.indexOf("#");
-    source = source.substring(0, n);
-    sourceP.innerHTML = source;
-    errorDiv.appendChild(sourceP);
-
-    const ul = document.createElement("ul");
-    const line = document.createElement("li");
-    line.innerHTML = "line number: " + lineno;
-    ul.appendChild(line);
-
-    const col = document.createElement("li");
-    col.innerHTML = "column number: " + colno;
-    ul.appendChild(col);
-    errorDiv.appendChild(ul);
-    const body = document.getElementsByTagName("body")[0];
-    errorDiv.setAttribute("style", "color:red; font-size:small");
-    body.appendChild(errorDiv);
-  };
-}
-
+/**
+ * returns the props attached at startup
+ */
 export const initialProps = (() => {
   let props = decodeURIComponent(location.hash.substr(1));
   try {
