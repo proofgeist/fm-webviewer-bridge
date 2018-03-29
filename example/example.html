@@ -1,0 +1,47 @@
+<html>
+
+<head>
+  <script src='https://unpkg.com/fm-webviewer-bridge/dist/fm-webviewer-bridge.umd.js'></script>
+</head>
+
+<body>
+  <div>I am web page with some JavaScript functions in it</div>
+  <button onclick='runScript()'>I can also run a FileMaker Script</button>
+  <script>
+
+    // here is a function called 'hello' that we'll expose
+    // to FM below
+
+    const hello = ({ who }) => {
+      alert("Hello " + who);
+
+      // anything you return from a function can get
+      // sent back to fm by providing a callback;
+      return { message: "hello " + who }
+    }
+
+
+    // create the externalAPIbridge and give it a function
+    //called 'hello' but expose it to FM as 'fmHello
+
+    const externalAPI = fm.externalAPI({ fmHello: hello })
+    externalAPI.start();
+
+
+    //later you can add more 'methods' ie 'functions'
+
+    externalAPI.addMethods({
+      goodbye: () => { alert('goodbye') },
+      seeYouSoon: () => { alert('see you soon') }
+    })
+
+    // when you want to call a FileMaker script
+    const runScript = () => {
+      const fmName = fm.initialProps.fileName
+      fm.callFMScript(fmName, 'MyScript', "Button clicked");
+    }
+
+  </script>
+</body>
+
+</html>

@@ -33,10 +33,10 @@ fm.callFMScript(file, script, data)
 
 ### With a script tag
 
-include the script in the header of your page
+Include the umd version of the script in the header of your page. The file is in the 'dist' folder. Or You can load it straight from the unpkg.com CDN like so.
 
 ```
-<script src='./<location>/m-webviewer-bridge.umd.js'></script>
+<script src='https://unpkg.com/fm-webviewer-bridge/dist/fm-webviewer-bridge.umd.js'></script>
 ```
 
 then later use the `fm` object in other scripts
@@ -78,7 +78,7 @@ the `fm` object has a some methods on it that let you expose specific JavaScript
 
     //later you can add more 'methods' ie 'functions'
 
-    fm.addMethods({
+    exteralAPI.addMethods({
       goodbye : ()=>{alert('goodbye')},
       seeYouSoon : ()=>{alert('see you soon')}
     })
