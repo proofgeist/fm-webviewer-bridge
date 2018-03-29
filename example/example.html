@@ -12,7 +12,7 @@
     // here is a function called 'hello' that we'll expose
     // to FM below
 
-    const hello = function (object) {
+    var hello = function (object) {
       alert("Hello " + object.who);
 
       // anything you return from a function can get
@@ -24,7 +24,7 @@
     // create the externalAPIbridge and give it a function
     //called 'hello' but expose it to FM as 'fmHello
 
-    const externalAPI = fm.externalAPI({ fmHello: hello })
+    var externalAPI = fm.externalAPI({ fmHello: hello })
     externalAPI.start();
 
 
@@ -36,8 +36,8 @@
     })
 
     // when you want to call a FileMaker script
-    const runScript = function () {
-      const fmName = fm.initialProps.fileName
+    var runScript = function () {
+      var fmName = fm.initialProps.fileName
       fm.callFMScript(fmName, 'MyScript', "Button clicked");
     }
 

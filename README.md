@@ -31,6 +31,8 @@ import fm from 'fm-webviewer-bridge'
 fm.callFMScript(file, script, data)
 ```
 
+NOTE: if you are going to use ES6 you'll need to transpile your code to ES5 if you want it to work with Windows. You can do this with either babel.js or buble.js
+
 ### With a script tag
 
 Include the umd version of the script in the header of your page. The file is in the 'dist' folder. Or You can load it straight from the unpkg.com CDN like so.
