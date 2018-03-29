@@ -1,6 +1,6 @@
 {
   "name": "fm-webviewer-bridge",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/fm-webviewer-bridge.cjs.js",
   "module": "dist/fm-webviewer-bridge.esm.js",
   "browser": "dist/fm-webviewer-bridge.umd.js",
@@ -9,7 +9,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "test": "node test/test.js",
-    "pretest": "npm run build"
+    "pretest": "npm run build",
+    "publish" : "npm run build && npm publish"
   },
   "devDependencies": {
     "rollup": "^0.57.0",
