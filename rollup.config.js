@@ -13,8 +13,8 @@ export default [
       format: "umd"
     },
     plugins: [
-      buble(),
       resolve(), // so Rollup can find `ms`
+      buble(),
       commonjs() // so Rollup can convert `ms` to an ES module
     ]
   },
@@ -32,6 +32,6 @@ export default [
       { file: pkg.main, format: "cjs" },
       { file: pkg.module, format: "es" }
     ],
-    plugins: [buble()]
+    plugins: [commonjs(), resolve(), buble()]
   }
 ];

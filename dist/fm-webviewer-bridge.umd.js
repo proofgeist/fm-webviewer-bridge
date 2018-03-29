@@ -4,10 +4,89 @@
   (factory((global.fm = {})));
 }(this, (function (exports) { 'use strict';
 
-  //polyfill Object.assign for IE
-  require("es6-object-assign").polyfill();
+  var attach = function () {
+    if (window.clipboardData) {
+      window.onerror = function(message, source, lineno, colno, error) {
+        var errorDiv = document.createElement("div");
+        var title = document.createElement("h1");
+        title.innerHTML = "Error!";
+        errorDiv.appendChild(title);
+        var messageP = document.createElement("p");
+        messageP.innerHTML = message;
+        errorDiv.appendChild(messageP);
+        var sourceP = document.createElement("p");
+        var n = source.indexOf("#");
+        source = source.substring(0, n);
+        sourceP.innerHTML = source;
+        errorDiv.appendChild(sourceP);
+
+        var ul = document.createElement("ul");
+        var line = document.createElement("li");
+        line.innerHTML = "line number: " + lineno;
+        ul.appendChild(line);
+
+        var col = document.createElement("li");
+        col.innerHTML = "column number: " + colno;
+        ul.appendChild(col);
+        errorDiv.appendChild(ul);
+        var body = document.getElementsByTagName("body")[0];
+        errorDiv.setAttribute("style", "color:red; font-size:small");
+        body.appendChild(errorDiv);
+      };
+    }
+  };
+
+  /**
+   * Code refactored from Mozilla Developer Network:
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+   */
+
+  function assign(target, firstSource) {
+    var arguments$1 = arguments;
+
+    if (target === undefined || target === null) {
+      throw new TypeError('Cannot convert first argument to object');
+    }
+
+    var to = Object(target);
+    for (var i = 1; i < arguments.length; i++) {
+      var nextSource = arguments$1[i];
+      if (nextSource === undefined || nextSource === null) {
+        continue;
+      }
+
+      var keysArray = Object.keys(Object(nextSource));
+      for (var nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
+        var nextKey = keysArray[nextIndex];
+        var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+        if (desc !== undefined && desc.enumerable) {
+          to[nextKey] = nextSource[nextKey];
+        }
+      }
+    }
+    return to;
+  }
+
+  function polyfill() {
+    if (!Object.assign) {
+      Object.defineProperty(Object, 'assign', {
+        enumerable: false,
+        configurable: true,
+        writable: true,
+        value: assign
+      });
+    }
+  }
+
+  var es6ObjectAssign = {
+    assign: assign,
+    polyfill: polyfill
+  };
+  var es6ObjectAssign_2 = es6ObjectAssign.polyfill;
+
   //attatch a windows error handler to make it easier to see errors on windows
-  require("./win.error.handler").attach();
+  attach();
+  es6ObjectAssign_2();
 
   /**
    * returns the props attached at startup

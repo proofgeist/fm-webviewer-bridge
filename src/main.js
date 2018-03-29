@@ -1,8 +1,10 @@
+//attatch a windows error handler to make it easier to see errors on windows
+import { attach } from "./win.error.handler";
+attach();
 
 //polyfill Object.assign for IE
-require("es6-object-assign").polyfill();
-//attatch a windows error handler to make it easier to see errors on windows
-require("./win.error.handler").attach();
+import { polyfill } from "es6-object-assign";
+polyfill();
 
 /**
  * returns the props attached at startup
