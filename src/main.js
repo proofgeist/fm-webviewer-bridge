@@ -9,7 +9,6 @@ export const initialProps = (() => {
 })();
 
 /**
- *
  * @param {string} fileName the name of the file that has the script
  * @param {string} scriptName the name ofthe script to call
  * @param {object|string} data an object or string containing the data to send as the parameter
@@ -18,7 +17,13 @@ export const callFMScript = (fileName, scriptName, data, callback) => {
   let parameter = encodeURIComponent(data);
   console.log("calling FM script", scriptName);
   console.log("---->file", fileName);
-  console.log("---->parameter", data);
+  console.log("---->parameter!", data);
+
+  if (parameter.length > 1000 && window.clipboardData) {
+    window.clipboardData.setData("Text", parameter);
+    parameter = "giant";
+  }
+
   const url =
     "fmp://$/" + fileName + "?script=" + scriptName + "&param=" + parameter;
 
@@ -32,7 +37,7 @@ export const callFMScript = (fileName, scriptName, data, callback) => {
   a.click();
   a.parentNode.removeChild(a);
 
-  //fixes a bug in IE
+  //IE FIX
   if (href.indexOf("#") > -1) {
     setTimeout(function() {
       window.location.href = href;
