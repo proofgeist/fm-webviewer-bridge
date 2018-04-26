@@ -12,7 +12,7 @@ This library creates a Bridge between the FileMaker WebViewer and the HTML/JS?CS
 ## Credits and History
 The techniques used in this module are not new. Some of them date back almost 10 years. I presented at DevCon on this topic back when 8.5 shipped. The techniques have changed over the years as Internet explorer improved. I am not sure who first discovered using onHashChange or using an a tag to call an fmp script. I am pretty sure that Jason Young at Seedcode was the first one to use the clipboard as a way to get around the URL length limit. 
 
-Beezwax has also done lots of stuff in this area. Their fmAJAX project and blog posts about it are good source material and informed some of the decisions I made when buulding this module.
+Beezwax has also done lots of stuff in this area. Their fmAJAX project and blog posts about it are good source material and informed some of the decisions I made when building this module.
 
 * https://github.com/beezwax/FMAjax
 * https://blog.beezwax.net/2015/09/18/fmajax-and-filemaker-web-viewers/
