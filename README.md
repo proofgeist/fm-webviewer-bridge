@@ -14,8 +14,8 @@ The techniques used in this module are not new. Some of them date back almost 10
 
 Beezwax has also done lots of stuff in this area. Their fmAJAX project and blog posts about it are good source material and informed some of the decisions I made when buulding this module.
 
-# https://github.com/beezwax/FMAjax
-# https://blog.beezwax.net/2015/09/18/fmajax-and-filemaker-web-viewers/
+* https://github.com/beezwax/FMAjax
+* https://blog.beezwax.net/2015/09/18/fmajax-and-filemaker-web-viewers/
 
 What is new here is the abstraction and the API. It is an attempt to make an API that is easy to understand for JS devs and for FileMaker Devs. It is also an attempt to image what an API might look like if it every made it's way into FileMaker's web viewer.
 
