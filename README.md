@@ -27,7 +27,7 @@ npm install fm-webviewer-bridge
 then in your app
 
 ```
-import fm from 'fm-webviewer-bridge'
+import * as fm from 'fm-webviewer-bridge'
 fm.callFMScript(file, script, data)
 ```
 
