@@ -17,7 +17,7 @@ Beezwax has also done lots of stuff in this area. Their fmAJAX project and blog 
 * https://github.com/beezwax/FMAjax
 * https://blog.beezwax.net/2015/09/18/fmajax-and-filemaker-web-viewers/
 
-What is new here is the abstraction and the API. It is an attempt to make an API that is easy to understand for JS devs and for FileMaker Devs. It is also an attempt to image what an API might look like if it every made it's way into FileMaker's web viewer.
+What is new here is the abstraction and the API. It is an attempt to make an API that is easy to understand for JS devs and for FileMaker Devs. It is also an attempt to imagine what an API might look like if it ever made it's way into FileMaker's web viewer, natively.
 
 ## Limits
 
