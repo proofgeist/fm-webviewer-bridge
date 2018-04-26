@@ -19,6 +19,10 @@ Beezwax has also done lots of stuff in this area. Their fmAJAX project and blog 
 
 What is new here is the abstraction and the API. It is an attempt to make an API that is easy to understand for JS devs and for FileMaker Devs. It is also an attempt to imagine what an API might look like if it ever made it's way into FileMaker's web viewer, natively.
 
+I believe this to be about the right level of abstraction based on what we can do today. It is a single file you can include in your JS app, and a couple of scripts you add to your FileMaker system. Individuall applications can build on top of this abstraction to handle almost any situation you come accross. We have built massive JS applications, that pass megabytes of data back and forth with out difficulty.  One example is our GoDraw application.
+
+https://www.geistinteractive.com/products/filemaker-drawing-tool-godraw/
+
 ## Limits
 
 * You can't call a FileMaker Script from a web viewer running in FileMaker WebDirect.
