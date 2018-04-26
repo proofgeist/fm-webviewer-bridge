@@ -21,7 +21,7 @@ What is new here is the abstraction and the API. It is an attempt to make an API
 
 ## Limits
 
-* This will not work on FileMaker WebDirect
+* You can't call a FileMaker Script from a web viewer running in FileMaker WebDirect.
 * It uses the clipboard on windows, and therefor may interfere with clipboard contents.
 * Doesn't work with a data URL. It must be a real URL. It can be to a server somewhere or a locally exported file
 * FileMaker 16 and later only.
