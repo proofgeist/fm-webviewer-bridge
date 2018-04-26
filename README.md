@@ -9,6 +9,16 @@ This library creates a Bridge between the FileMaker WebViewer and the HTML/JS?CS
 1.  make it possible to call JavaScript functions in a web viewer via FileMaker scripts, WITHOUT causing the web viewer to refresh each time.
 1.  Allow JavaScript apps to call FileMaker Scripts using the fmp url, with huge amounts of data as the script parameter
 
+## Credits and History
+The techniques used in this module are not new. Some of them date back almost 10 years. I presented at DevCon on this topic back when 8.5 shipped. The techniques have changed over the years as Internet explorer improved. I am not sure who first discovered using onHashChange or using an a tag to call an fmp script. I am pretty sure that Jason Young at Seedcode was the first one to use the clipboard as a way to get around the URL length limit. 
+
+Beezwax has also done lots of stuff in this area. Their fmAJAX project and blog posts about it are good source material and informed some of the decisions I made when buulding this module.
+
+https://github.com/beezwax/FMAjax
+https://blog.beezwax.net/2015/09/18/fmajax-and-filemaker-web-viewers/
+
+What is new here is the abstraction and the API. It is an attempt to make an API that is easy to understand for JS devs and for FileMaker Devs. It is also an attempt to image what an API might look like if it every made it's way into FileMaker's web viewer.
+
 ## Limits
 
 * This will not work on FileMaker WebDirect
