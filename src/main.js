@@ -12,10 +12,10 @@ let propsLoadedCallback, loadedProps;
 /**
  * this callback runs when props have been loaded
  * if props have already been loaded it runs immediately
- * 
- * @param {*} callback 
+ *
+ * @param {*} callback
  */
-export const intialPropsLoaded = callback => {
+export const initialPropsLoaded = callback => {
   if (loadedProps) return callback(loadedProps);
   propsLoadedCallback = callback;
 };
