@@ -6,18 +6,69 @@ attach();
 import { polyfill } from "es6-object-assign";
 polyfill();
 
+//setup functions and vars for use below
+let propsLoadedCallback, loadedProps;
+
 /**
- * returns the props attached at startup
+ * this callback runs when props have been loaded
+ * if props have already been loaded it runs immediately
+ * 
+ * @param {*} callback 
  */
-export const initialProps = (() => {
-  let props = decodeURIComponent(location.hash.substr(1));
-  try {
-    props = JSON.parse(props);
-  } catch (e) {}
-  console.log("initialProps");
+export const intialPropsLoaded = callback => {
+  if (loadedProps) return callback(loadedProps);
+  propsLoadedCallback = callback;
+};
+
+const _saveProps = props => {
   console.log(props);
-  return props;
+  loadedProps = props;
+  if (propsLoadedCallback) return propsLoadedCallback(props);
+};
+
+//start looking for Data from the WebViewer
+//this is sync
+export const initialProps = (() => {
+  if (window.__FM__INLINED__DATA__) {
+    //found it directly inlined
+    console.log("found props inline");
+    _saveProps(__FM__INLINED__DATA__);
+    return props;
+  } else {
+    //look for it on the hash
+    let props = decodeURIComponent(location.hash.substr(1));
+    try {
+      props = JSON.parse(props);
+      //found it on the hash
+      console.log("found props on hash");
+      _saveProps(props);
+      return props;
+    } catch (e) {
+      loadedProps = undefined;
+    }
+  }
 })();
+
+// if we got here we are likely in debug mode.
+// look for the example file - this is async
+if (!loadedProps) {
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", "data.json", true);
+  xhr.responseType = "json";
+  xhr.timeout = 100;
+  xhr.onload = function() {
+    let status = xhr.status;
+    if (status === 200) {
+      let exampleData = xhr.response;
+      console.log("found props in example.json");
+      _saveProps(exampleData);
+    }
+  };
+  xhr.onerror = function(e) {
+    console.log(e);
+  };
+  xhr.send();
+}
 
 /**
  * @param {string} fileName the name of the file that has the script
@@ -89,10 +140,14 @@ export const externalAPI = (methods = {}) => {
       parameter = JSON.parse(parameter);
     } catch (e) {}
     const file = hash.callback
-      ? hash.callback.file ? hash.callback.file : ""
+      ? hash.callback.file
+        ? hash.callback.file
+        : ""
       : "";
     const script = hash.callback
-      ? hash.callback.script ? hash.callback.script : ""
+      ? hash.callback.script
+        ? hash.callback.script
+        : ""
       : "";
 
     console.log("----> function: " + functionName);
