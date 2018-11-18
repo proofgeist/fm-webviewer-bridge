@@ -33,7 +33,7 @@ export const initialProps = (() => {
     //found it directly inlined
     console.log("found props inline");
     _saveProps(__FM__INLINED__DATA__);
-    return props;
+    return __FM__INLINED__DATA__;
   } else {
     //look for it on the hash
     let props = decodeURIComponent(location.hash.substr(1));

@@ -94,10 +94,10 @@
   /**
    * this callback runs when props have been loaded
    * if props have already been loaded it runs immediately
-   * 
-   * @param {*} callback 
+   *
+   * @param {*} callback
    */
-  var intialPropsLoaded = function (callback) {
+  var initialPropsLoaded = function (callback) {
     if (loadedProps) { return callback(loadedProps); }
     propsLoadedCallback = callback;
   };
@@ -294,7 +294,7 @@
     };
   };
 
-  exports.intialPropsLoaded = intialPropsLoaded;
+  exports.initialPropsLoaded = initialPropsLoaded;
   exports.initialProps = initialProps;
   exports.callFMScript = callFMScript;
   exports.externalAPI = externalAPI;
