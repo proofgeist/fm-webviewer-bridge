@@ -1,27 +1,33 @@
 <html>
+  <head>
+    <script src="./dist/fm-webviewer-bridge.umd.js"></script>
+  </head>
 
-<head>
-  <script src='./dist/fm-webviewer-bridge.umd.js'></script>
-</head>
+  <body>
+    ok
+    <script>
+      var hello = function(parameter) {
+        alert("Hello " + parameter.who);
+        return { message: "hello " + parameter.who };
+      };
 
-<body>ok
-  <script>
-    var hello = function (parameter) {
-      alert("Hello " + parameter.who);
-      return { message: "hello " + parameter.who }
-    }
+      var filterArray = function(parameter) {
+        var data = parameter.data;
+        var filterCity = parameter.filterCity;
+        var result = data.filter(function(element) {
+          return element.city === filterCity;
+        });
+        return result;
+      };
+      var exteralAPI = fm.externalAPI({
+        hello: hello,
+        filterArray: filterArray
+      });
 
-    var filterArray = function (parameter) {
-      var data = parameter.data;
-      var filterCity = parameter.filterCity;
-      var result = data.filter(function (element) {
-        return element.city === filterCity
-      })
-      return result
-    }
-    var exteralAPI = fm.externalAPI({ hello: hello, filterArray: filterArray })
-    exteralAPI.start();
-  </script>
-</body>
-
+      //NEW use this method to ensure that props have been located
+      fm.intialPropsLoaded(function(props) {
+        exteralAPI.start();
+      });
+    </script>
+  </body>
 </html>

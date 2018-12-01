@@ -1,0 +1,11 @@
+{
+  "description": "this file is used for testing while developing.",
+  "activities": [
+    {
+      "name": "Joe"
+    },
+    {
+      "name": "Sue"
+    }
+  ]
+}

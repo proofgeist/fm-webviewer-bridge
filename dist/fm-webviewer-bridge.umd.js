@@ -88,18 +88,69 @@
   attach();
   es6ObjectAssign_2();
 
+  //setup functions and vars for use below
+  var propsLoadedCallback, loadedProps;
+
   /**
-   * returns the props attached at startup
+   * this callback runs when props have been loaded
+   * if props have already been loaded it runs immediately
+   *
+   * @param {*} callback
    */
-  var initialProps = (function () {
-    var props = decodeURIComponent(location.hash.substr(1));
-    try {
-      props = JSON.parse(props);
-    } catch (e) {}
-    console.log("initialProps");
+  var initialPropsLoaded = function (callback) {
+    if (loadedProps) { return callback(loadedProps); }
+    propsLoadedCallback = callback;
+  };
+
+  var _saveProps = function (props) {
     console.log(props);
-    return props;
+    loadedProps = props;
+    if (propsLoadedCallback) { return propsLoadedCallback(props); }
+  };
+
+  //start looking for Data from the WebViewer
+  //this is sync
+  var initialProps = (function () {
+    if (window.__FM__INLINED__DATA__) {
+      //found it directly inlined
+      console.log("found props inline");
+      _saveProps(__FM__INLINED__DATA__);
+      return props;
+    } else {
+      //look for it on the hash
+      var props$1 = decodeURIComponent(location.hash.substr(1));
+      try {
+        props$1 = JSON.parse(props$1);
+        //found it on the hash
+        console.log("found props on hash");
+        _saveProps(props$1);
+        return props$1;
+      } catch (e) {
+        loadedProps = undefined;
+      }
+    }
   })();
+
+  // if we got here we are likely in debug mode.
+  // look for the example file - this is async
+  if (!loadedProps) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "data.json", true);
+    xhr.responseType = "json";
+    xhr.timeout = 100;
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status === 200) {
+        var exampleData = xhr.response;
+        console.log("found props in example.json");
+        _saveProps(exampleData);
+      }
+    };
+    xhr.onerror = function(e) {
+      console.log(e);
+    };
+    xhr.send();
+  }
 
   /**
    * @param {string} fileName the name of the file that has the script
@@ -173,10 +224,14 @@
         parameter = JSON.parse(parameter);
       } catch (e) {}
       var file = hash.callback
-        ? hash.callback.file ? hash.callback.file : ""
+        ? hash.callback.file
+          ? hash.callback.file
+          : ""
         : "";
       var script = hash.callback
-        ? hash.callback.script ? hash.callback.script : ""
+        ? hash.callback.script
+          ? hash.callback.script
+          : ""
         : "";
 
       console.log("----> function: " + functionName);
@@ -239,6 +294,7 @@
     };
   };
 
+  exports.initialPropsLoaded = initialPropsLoaded;
   exports.initialProps = initialProps;
   exports.callFMScript = callFMScript;
   exports.externalAPI = externalAPI;
