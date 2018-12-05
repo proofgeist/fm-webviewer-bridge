@@ -1,6 +1,7 @@
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import buble from "rollup-plugin-buble";
+import { eslint } from "rollup-plugin-eslint";
 import pkg from "./package.json";
 
 export default [
@@ -15,6 +16,7 @@ export default [
     plugins: [
       resolve(), // so Rollup can find `ms`
       buble(),
+      eslint(),
       commonjs() // so Rollup can convert `ms` to an ES module
     ]
   },
