@@ -11,6 +11,7 @@ module.exports = {
   plugins: ["prettier"],
   extends: ["eslint:recommended"],
   rules: {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "no-console": 0
   }
 };
