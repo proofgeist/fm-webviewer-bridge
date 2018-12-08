@@ -34,7 +34,7 @@ module.exports = {
     //   "json",
     "text",
     "lcov",
-    "clover"
+    "html"
   ]
 
   // An object that configures minimum threshold enforcement for coverage results
