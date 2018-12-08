@@ -51,14 +51,6 @@ describe("External API", () => {
     window.location.href = originalURL + '#{"function":"test"}';
   });
 
-  // test("it should allow you to register a promise after starting", done => {
-  //   const test = () => Promise.resolve(true);
-
-  //   externalAPI.start();
-  //   externalAPI.addMethods({ test });
-  //   window.location.href = originalURL + '#{"function":"test"}';
-  // });
-
   test("it should should listen for an updated hash", done => {
     let data = {
       function: "test"
