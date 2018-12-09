@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# MacOS Folder Metadata
+.DS_Store
+
+# Code coverage reports
+/coverage
